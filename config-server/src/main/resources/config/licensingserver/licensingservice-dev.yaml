@@ -1,4 +1,5 @@
-tracer.property: "I AM THE DEV"
+tracer:
+  property: "I AM THE DEV"
 spring.jpa.database: "POSTGRESQL"
 spring.datasource.platform: "postgres"
 spring.jpa.show-sql: "true"

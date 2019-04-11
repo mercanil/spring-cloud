@@ -22,14 +22,14 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public License getLicense(String organizationId, String licenseId) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
-        license.setComment(serviceConfig.getExampleProperty());
+        license.setComment(serviceConfig.getTracer());
         return license;
     }
 
     @Override
     public List<License> getLicenseByOrganization(String organizationId) {
         List<License> orgList = licenseRepository.findByOrganizationId(organizationId);
-        orgList.forEach(org -> org.setComment(serviceConfig.getExampleProperty()));
+        orgList.forEach(org -> org.setComment(serviceConfig.getTracer()));
         return orgList;
     }
 

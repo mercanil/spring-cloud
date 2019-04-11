@@ -5,9 +5,17 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 @Component
 @Getter
 public class ServiceConfig {
-    @Value("${example.property}")
-    private String exampleProperty;
+
+    @Value("${tracer.property}")
+    private String tracer;
+
+    @PostConstruct
+    public void postConstruct() {
+        System.out.println("------------------" + tracer);
+    }
 }
