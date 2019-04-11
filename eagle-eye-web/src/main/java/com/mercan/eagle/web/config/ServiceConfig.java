@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 public class ServiceConfig {
-
     @Value("${example.property}")
     private String exampleProperty;
-
 }
