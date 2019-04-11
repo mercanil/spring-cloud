@@ -13,10 +13,9 @@
     <name>Eagle Eye Config Server</name>
 
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>com.mercan.config.ConfigApplication </start-class>
+        <start-class>com.mercan.config.ConfigApplication</start-class>
         <java.version>1.8</java.version>
         <docker.image.name>mercanil/mrcn-confsvr</docker.image.name>
         <docker.image.tag>springcloud</docker.image.tag>
@@ -74,7 +73,6 @@
     </build>
 
 
-
     <repositories>
         <repository>
             <id>spring-snapshots</id>
@@ -119,12 +117,6 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
-
-
-
-
-
 
 
 </project>

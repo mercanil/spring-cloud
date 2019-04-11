@@ -13,16 +13,16 @@ import javax.persistence.*;
 @Table(name = "licenses")
 public class License {
     @Id
-    @Column(name = "license_id" , nullable = false)
-    private  String id;
+    @Column(name = "license_id", nullable = false)
+    private String id;
 
     @Column(nullable = false)
-    private  String productName;
-    private  String licenseType;
+    private String productName;
+    private String licenseType;
 
 
     @Column(nullable = false)
-    private  String organizationId;
+    private String organizationId;
 
     @Transient
     private String comment;

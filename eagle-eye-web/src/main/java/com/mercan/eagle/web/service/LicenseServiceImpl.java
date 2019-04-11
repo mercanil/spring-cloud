@@ -15,8 +15,7 @@ import java.util.UUID;
 public class LicenseServiceImpl implements LicenseService {
 
 
-
-    private  final LicenseRepository licenseRepository;
+    private final LicenseRepository licenseRepository;
     private final ServiceConfig serviceConfig;
 
 
@@ -34,7 +33,7 @@ public class LicenseServiceImpl implements LicenseService {
         return orgList;
     }
 
-    public License saveLicense(License license){
+    public License saveLicense(License license) {
         license.setId(UUID.randomUUID().toString());
         licenseRepository.save(license);
         return license;

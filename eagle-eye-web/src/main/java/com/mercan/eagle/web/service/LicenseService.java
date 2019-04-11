@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface LicenseService {
     License getLicense(String organizationId, String licenseId);
+
     List<License> getLicenseByOrganization(String organizationId);
 
 }
