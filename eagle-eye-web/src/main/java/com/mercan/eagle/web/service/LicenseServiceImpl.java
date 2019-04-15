@@ -2,7 +2,7 @@ package com.mercan.eagle.web.service;
 
 import com.mercan.eagle.web.config.ServiceConfig;
 import com.mercan.eagle.web.model.License;
-import com.mercan.eagle.web.repostory.LicenseRepository;
+import com.mercan.eagle.web.repository.LicenseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +33,24 @@ public class LicenseServiceImpl implements LicenseService {
         return orgList;
     }
 
+    @Override
+    public List<License> getTopLicense() {
+        //TODO implement method
+        return null;
+    }
+
+    @Override
+    public void updateLicense(License license) {
+       licenseRepository.save(license);
+    }
+
+    @Override
+    public void deletePost(String id) {
+        licenseRepository.deleteById(id);
+    }
+
     public License saveLicense(License license) {
-        license.setId(UUID.randomUUID().toString());
+        license.setLicenseId(UUID.randomUUID().toString());
         licenseRepository.save(license);
         return license;
     }

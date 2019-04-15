@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class License {
     @Id
     @Column(name = "license_id", nullable = false)
-    private String id;
+    private String licenseId;
 
     @Column(nullable = false)
     private String productName;

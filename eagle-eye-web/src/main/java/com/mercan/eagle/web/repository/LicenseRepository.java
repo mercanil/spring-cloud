@@ -1,4 +1,4 @@
-package com.mercan.eagle.web.repostory;
+package com.mercan.eagle.web.repository;
 
 import com.mercan.eagle.web.model.License;
 import org.springframework.data.repository.CrudRepository;

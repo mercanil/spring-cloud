@@ -9,4 +9,9 @@ public interface LicenseService {
 
     List<License> getLicenseByOrganization(String organizationId);
 
+    List<License> getTopLicense();
+
+    void updateLicense(License license);
+
+    void deletePost(String id);
 }

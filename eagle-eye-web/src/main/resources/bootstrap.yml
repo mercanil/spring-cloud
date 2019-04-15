@@ -2,8 +2,7 @@ spring:
   application:
     name: licensingservice #must map config server folder name
   profiles:
-    active:
-      default
+    active: dev
   cloud:
     config:
       uri: http://localhost:8888
