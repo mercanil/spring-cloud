@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class LoadData implements CommandLineRunner {
 
-    private final  LicenseRepository repository;
+    private final LicenseRepository repository;
+
     @Override
     public void run(String... args) throws Exception {
         License license = License.builder().licenseId("lic1").organizationId("org1").productName("pro1").licenseType("free").build();

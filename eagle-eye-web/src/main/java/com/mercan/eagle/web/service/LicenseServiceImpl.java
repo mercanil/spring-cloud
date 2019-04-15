@@ -41,7 +41,7 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public void updateLicense(License license) {
-       licenseRepository.save(license);
+        licenseRepository.save(license);
     }
 
     @Override

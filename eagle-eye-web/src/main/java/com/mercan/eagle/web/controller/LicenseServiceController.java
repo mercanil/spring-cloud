@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class LicenseServiceController {
     private final static String cacheValue = "license-single";
     private final LicenseService licenseService;
 
-    @Cacheable(value = cacheValue  )
+    @Cacheable(value = cacheValue)
     @GetMapping(value = "{licenseId}")
     public License getLicense(@PathVariable(value = "organizationId") String organizationId,
                               @PathVariable(value = "licenseId") String licenseId) {
@@ -39,7 +38,7 @@ public class LicenseServiceController {
     }
 
 
-    @CachePut(value = cacheValue , key = "#license.id")
+    @CachePut(value = cacheValue, key = "#license.id")
     @PostMapping("/")
     public License updateLiceseById(@RequestBody License license) throws LicenseNotFoundException {
         log.info("update post with id {}", license.getLicenseId());
