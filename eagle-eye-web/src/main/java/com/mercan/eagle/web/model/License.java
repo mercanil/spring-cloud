@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "licenses")
+@Table(name = "licenses",schema = "public")
 public class License {
     @Id
     @Column(name = "license_id", nullable = false)

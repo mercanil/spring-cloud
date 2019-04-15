@@ -28,12 +28,7 @@ public class LicenseServiceController {
     public License getLicense(@PathVariable(value = "organizationId") String organizationId,
                               @PathVariable(value = "licenseId") String licenseId) {
 
-        return License.builder()
-                .licenseId(licenseId)
-                .licenseType("Seat")
-                .productName("Teleco")
-                .organizationId(organizationId)
-                .build();
+        return licenseService.getLicense(organizationId, licenseId);
     }
 
     @Cacheable(value = "post-top")

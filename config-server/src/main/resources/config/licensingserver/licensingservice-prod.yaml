@@ -5,12 +5,17 @@ spring:
     username: postgres
     password: postgres
   jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
     properties:
       hibernate:
         jdbc:
           lob:
             non_contextual_creation: true #https://github.com/pgjdbc/pgjdbc/issues/1102
         dialect: org.hibernate.dialect.PostgreSQLDialect
+hibernate:
+  default_schema: license
 
 
 #docker run --name local-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=license -d postgres
