@@ -49,6 +49,11 @@ public class LicenseServiceImpl implements LicenseService {
         licenseRepository.deleteById(id);
     }
 
+    @Override
+    public void save(License license) {
+        licenseRepository.save(license);
+    }
+
     public License saveLicense(License license) {
         license.setLicenseId(UUID.randomUUID().toString());
         licenseRepository.save(license);

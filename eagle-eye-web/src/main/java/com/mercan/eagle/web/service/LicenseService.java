@@ -14,4 +14,6 @@ public interface LicenseService {
     void updateLicense(License license);
 
     void deletePost(String id);
+
+    void save(License license);
 }

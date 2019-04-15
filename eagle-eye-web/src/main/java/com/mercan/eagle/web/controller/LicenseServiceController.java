@@ -24,7 +24,7 @@ public class LicenseServiceController {
     private final static String cacheValue = "license-single";
     private final LicenseService licenseService;
 
-    @Cacheable(value = cacheValue ,key = "#licenseId" )
+    @Cacheable(value = cacheValue  )
     @GetMapping(value = "{licenseId}")
     public License getLicense(@PathVariable(value = "organizationId") String organizationId,
                               @PathVariable(value = "licenseId") String licenseId) {
@@ -40,10 +40,10 @@ public class LicenseServiceController {
 
 
     @CachePut(value = cacheValue , key = "#license.id")
-    @PutMapping("/")
+    @PostMapping("/")
     public License updateLiceseById(@RequestBody License license) throws LicenseNotFoundException {
         log.info("update post with id {}", license.getLicenseId());
-        licenseService.updateLicense(license);
+        licenseService.save(license);
         return license;
     }
 
