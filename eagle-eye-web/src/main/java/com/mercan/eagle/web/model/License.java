@@ -4,6 +4,7 @@ package com.mercan.eagle.web.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "licenses",schema = "public")
-public class License {
+public class License implements Serializable {
     @Id
     @Column(name = "license_id", nullable = false)
     private String licenseId;

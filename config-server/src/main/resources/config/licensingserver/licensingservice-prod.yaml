@@ -1,5 +1,10 @@
 tracer.property: "I AM THE PROD"
 spring:
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
   datasource:
     url: jdbc:postgresql://localhost:5432/license
     username: postgres

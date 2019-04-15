@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class LicenseServiceController {
     private final static String cacheValue = "license-single";
     private final LicenseService licenseService;
 
-    @Cacheable(value = cacheValue ,key = "#id" , unless = "#result.shares < 500" )
+    @Cacheable(value = cacheValue ,key = "#licenseId" )
     @GetMapping(value = "{licenseId}")
     public License getLicense(@PathVariable(value = "organizationId") String organizationId,
                               @PathVariable(value = "licenseId") String licenseId) {

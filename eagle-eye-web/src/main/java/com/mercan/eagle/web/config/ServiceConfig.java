@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 
 @Component
 @Getter
+
 public class ServiceConfig {
 
     @Value("${tracer.property}")
