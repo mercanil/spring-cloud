@@ -1,11 +1,26 @@
-tracer.property: "I AM THE DEFAULT"
-spring.jpa.database: "POSTGRESQL"
-spring.datasource.platform: "postgres"
-spring.jpa.show-sql: "true"
-spring.database.driverClassName: "org.postgresql.Driver"
-spring.datasource.url: "jdbc:postgresql://database:5432/eagle_eye_local"
-spring.datasource.username: "postgres"
-spring.datasource.testWhileIdle: "true"
-spring.jpa.properties.hibernate.dialect:
-  "org.hibernate.dialect.PostgreSQLDialect"
+tracer.property: "I AM THE PROD"
+spring:
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+  datasource:
+    url: jdbc:postgresql://localhost:5432/license
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true #https://github.com/pgjdbc/pgjdbc/issues/1102
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+hibernate:
+  default_schema: license
 
+
+#docker run --name local-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=license -d postgres

@@ -2,9 +2,21 @@ server:
   port: 8888
 spring:
   profiles:
-    active: native #There is also a "native" profile in the Config Server that doesn’t use Git, but just loads the config files from the local classpath or file system
+    active: mac #There is also a "native" profile in the Config Server that doesn’t use Git, but just loads the config files from the local classpath or file system
   cloud:
     config:
       server:
         native:
           searchLocations: file:///C:/Users/emerani/Documents/git/spring-cloud/config-server/src/main/resources/config/licensingserver
+
+---
+server:
+  port: 8888
+spring:
+  profiles:
+    active: native #There is also a "native" profile in the Config Server that doesn’t use Git, but just loads the config files from the local classpath or file system
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: file:///Users/mercan/Developer/git/spring-cloud/config-server/src/main/resources/config/licensingserver

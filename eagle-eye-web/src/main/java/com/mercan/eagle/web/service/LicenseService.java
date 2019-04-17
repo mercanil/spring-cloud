@@ -1,19 +1,18 @@
 package com.mercan.eagle.web.service;
 
+import com.mercan.eagle.web.exception.LicenseNotFoundException;
 import com.mercan.eagle.web.model.License;
 
 import java.util.List;
 
 public interface LicenseService {
-    License getLicense(String organizationId, String licenseId);
+    License getLicense(String organizationId, String licenseId) throws LicenseNotFoundException;
 
     List<License> getLicenseByOrganization(String organizationId);
 
-    List<License> getTopLicense();
 
-    void updateLicense(License license);
+    void saveOrUpdateLicense(License license);
 
     void deletePost(String id);
 
-    void save(License license);
 }

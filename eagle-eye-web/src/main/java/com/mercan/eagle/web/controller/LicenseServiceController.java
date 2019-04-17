@@ -31,32 +31,27 @@ public class LicenseServiceController {
         return licenseService.getLicense(organizationId, licenseId);
     }
 
-    @Cacheable(value = "post-top")
-    @GetMapping("/top")
-    public List<License> getTopLicense() {
-        return licenseService.getTopLicense();
-    }
-
-
-    @CachePut(value = cacheValue, key = "#license.id")
+    @CachePut(value = cacheValue)
     @PostMapping("/")
-    public License updateLiceseById(@RequestBody License license) throws LicenseNotFoundException {
+    public License createLicense(@RequestBody License license) throws LicenseNotFoundException {
         log.info("update post with id {}", license.getLicenseId());
-        licenseService.save(license);
+        licenseService.saveOrUpdateLicense(license);
         return license;
     }
 
-    @CacheEvict(value = cacheValue, key = "#id")
-    @DeleteMapping("/delete/{id}")
+    @CachePut(value = cacheValue)
+    @PutMapping("/")
+    public License updateLicense(@RequestBody License license) throws LicenseNotFoundException {
+        log.info("update post with id {}", license.getLicenseId());
+        licenseService.saveOrUpdateLicense(license);
+        return license;
+    }
+
+    @CacheEvict(value = cacheValue)
+    @DeleteMapping("/{id}")
     public void deletePostByID(@PathVariable String id) throws LicenseNotFoundException {
         log.info("delete post with id {}", id);
         licenseService.deletePost(id);
-    }
-
-    @CacheEvict(value = "post-top")
-    @GetMapping("/top/evict")
-    public void evictTopPosts() {
-        log.info("Evict post-top");
     }
 
 }

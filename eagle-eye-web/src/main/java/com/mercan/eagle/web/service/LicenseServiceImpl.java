@@ -1,12 +1,14 @@
 package com.mercan.eagle.web.service;
 
 import com.mercan.eagle.web.config.ServiceConfig;
+import com.mercan.eagle.web.exception.LicenseNotFoundException;
 import com.mercan.eagle.web.model.License;
 import com.mercan.eagle.web.repository.LicenseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -20,10 +22,12 @@ public class LicenseServiceImpl implements LicenseService {
 
 
     @Override
-    public License getLicense(String organizationId, String licenseId) {
-        License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
-        license.setComment(serviceConfig.getTracer());
-        return license;
+    public License getLicense(String organizationId, String licenseId) throws LicenseNotFoundException {
+        Optional<License> license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
+        if(!license.isPresent()){
+            throw new LicenseNotFoundException();
+        }
+        return license.get();
     }
 
     @Override
@@ -33,30 +37,17 @@ public class LicenseServiceImpl implements LicenseService {
         return orgList;
     }
 
-    @Override
-    public List<License> getTopLicense() {
-        //TODO implement method
-        return null;
-    }
 
     @Override
-    public void updateLicense(License license) {
+    public void saveOrUpdateLicense(License license) {
+        if (license.getLicenseId() == null){
+            license.setLicenseId(UUID.randomUUID().toString());
+        }
         licenseRepository.save(license);
     }
 
     @Override
     public void deletePost(String id) {
         licenseRepository.deleteById(id);
-    }
-
-    @Override
-    public void save(License license) {
-        licenseRepository.save(license);
-    }
-
-    public License saveLicense(License license) {
-        license.setLicenseId(UUID.randomUUID().toString());
-        licenseRepository.save(license);
-        return license;
     }
 }
