@@ -3,6 +3,7 @@ package com.mercan.eagle.web.service;
 import com.mercan.eagle.web.config.ServiceConfig;
 import com.mercan.eagle.web.exception.LicenseNotFoundException;
 import com.mercan.eagle.web.model.License;
+import com.mercan.eagle.web.model.Organization;
 import com.mercan.eagle.web.repository.LicenseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,22 @@ public class LicenseServiceImpl implements LicenseService {
 
 
     @Override
-    public License getLicense(String organizationId, String licenseId) throws LicenseNotFoundException {
+    public License getLicense(String organizationId, String licenseId , String clientType) throws LicenseNotFoundException {
         Optional<License> license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
+        Organization organization = retriveOrgInfo(organizationId ,clientType );
         if(!license.isPresent()){
             throw new LicenseNotFoundException();
         }
-        return license.get();
+          return   license.get()
+                .withContactEmail(organization.getContactEmail())
+                .withContactName(organization.getContactName())
+                .withOrganizationName(organization.getName())
+                .withContactPhone(organization.getContactPhone());
+    }
+
+    public Organization retriveOrgInfo(String organizationId, String clientType) {
+
+        return null;
     }
 
     @Override
