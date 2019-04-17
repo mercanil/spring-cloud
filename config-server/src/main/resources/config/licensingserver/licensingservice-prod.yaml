@@ -6,7 +6,7 @@ spring:
     host: localhost
     port: 6379
   datasource:
-    url: jdbc:postgresql://localhost:5432/license
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
   jpa:

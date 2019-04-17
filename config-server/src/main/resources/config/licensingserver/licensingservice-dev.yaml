@@ -1,3 +1,5 @@
+tracer:
+  property:  "I AM THE DEFAULT"
 spring:
   cache:
     type: redis

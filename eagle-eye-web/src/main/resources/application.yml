@@ -1,0 +1,30 @@
+tracer:
+  property:  "I AM THE DEFAULT"
+
+spring:
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+  database:
+    driverClassName: org.postgresql.Driver
+  jpa:
+    generate-ddl: true
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    platform: postgres
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL94Dialect
