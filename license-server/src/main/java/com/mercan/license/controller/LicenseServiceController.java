@@ -24,10 +24,9 @@ public class LicenseServiceController {
     @Cacheable(value = cacheValue)
     @GetMapping(value = "{licenseId}")
     public License getLicense(@PathVariable(value = "organizationId") String organizationId,
-                              @PathVariable(value = "licenseId") String licenseId,
-                              @PathVariable(value = "clientType") String clientType) throws LicenseNotFoundException {
+                              @PathVariable(value = "licenseId") String licenseId) throws LicenseNotFoundException {
 
-        return licenseService.getLicense(organizationId, licenseId,clientType);
+        return licenseService.getLicense(organizationId, licenseId);
     }
 
     @CachePut(value = cacheValue)
