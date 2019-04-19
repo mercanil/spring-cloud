@@ -5,6 +5,9 @@ import com.mercan.license.repository.LicenseRepository;
 import com.mercan.license.config.ServiceConfig;
 import com.mercan.license.exception.LicenseNotFoundException;
 import com.mercan.license.model.License;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
@@ -15,12 +18,18 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@DefaultProperties(
+        commandProperties = {
+                @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds" , value = "500")
+        }
+)
 public class LicenseServiceImpl implements LicenseService {
 
 
@@ -29,7 +38,10 @@ public class LicenseServiceImpl implements LicenseService {
     private final RestTemplate restTemplate;
 
     @Override
+    @HystrixCommand(fallbackMethod = "buildFallbackLicenseList")
+
     public License getLicense(String organizationId, String licenseId ) throws LicenseNotFoundException {
+        sleep();
         Optional<License> license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
         Organization organization = retriveOrgInfo(organizationId );
         if(!license.isPresent()){
@@ -40,6 +52,18 @@ public class LicenseServiceImpl implements LicenseService {
             .withContactName(organization.getContactName())
             .withOrganizationName(organization.getName())
             .withContactPhone(organization.getContactPhone());
+    }
+
+    public License buildFallbackLicenseList(String organizationId,String licenseId){
+        return License.builder()
+                .comment("empty")
+                .contactEmail("empty")
+                .contactPhone("empty")
+                .contactName("empty")
+                .licenseId(licenseId)
+                .licenseType("empty")
+                .comment(organizationId)
+                .build();
     }
 
     public Organization retriveOrgInfo(String organizationId) {
@@ -53,7 +77,9 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Override
+    @HystrixCommand
     public List<License> getLicenseByOrganization(String organizationId) {
+        randomlyRunLong();
         List<License> orgList = licenseRepository.findByOrganizationId(organizationId);
         orgList.forEach(org -> org.setComment(serviceConfig.getTracer()));
         return orgList;
@@ -71,5 +97,19 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public void deletePost(String id) {
         licenseRepository.deleteById(id);
+    }
+
+
+    private void randomlyRunLong(){
+        Random rand = new Random();
+        int randomNum = rand.nextInt((3 - 1) + 1) + 1;
+        if (randomNum==3) sleep();
+    }
+    private void sleep(){
+        try {
+            Thread.sleep(11000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

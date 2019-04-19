@@ -22,6 +22,12 @@ spring:
 hibernate:
   default_schema: license
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - hystrix.stream
 
 eureka:
   instance:
