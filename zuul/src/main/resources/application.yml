@@ -19,3 +19,12 @@ management:
     web:
       exposure:
         include: routes, filters #http://localhost:6060/actuator/routesó
+
+zuul:
+  ignored-services:
+    - organizationservice
+  routes:
+    organizationservice: /organization/**
+    licensestatic:
+      path: /test/**
+      url : http://static-content-outside-eureka
