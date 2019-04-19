@@ -1,0 +1,27 @@
+tracer.property: "I AM THE PROD"
+spring:
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+  datasource:
+    url: jdbc:postgresql://localhost:5432/license
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true #https://github.com/pgjdbc/pgjdbc/issues/1102
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+hibernate:
+  default_schema: license
+
+server:
+  port: 6060
+#docker run --name local-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=license -d postgres
