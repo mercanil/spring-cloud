@@ -9,6 +9,7 @@
         <module>eureka</module>
         <module>organizastion-service</module>
         <module>zuul</module>
+        <module>oauth-server</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
