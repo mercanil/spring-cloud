@@ -24,6 +24,7 @@ zuul:
   ignored-services:
     - organizationservice
   routes:
+    licensingservice: /license/**
     organizationservice: /organization/**
     licensestatic:
       path: /test/**
