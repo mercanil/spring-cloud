@@ -1,6 +1,7 @@
 package com.mercan.organization.controller;
 
 
+import com.mercan.annotation.LogExecutionTime;
 import com.mercan.organization.exception.OrganizationNotFoundException;
 import com.mercan.organization.model.Organization;
 import com.mercan.organization.service.OrganizationService;
@@ -25,6 +26,7 @@ public class OrganizationServiceController {
 
     @Cacheable(value = cacheValue)
     @GetMapping(value = "{organizationId}")
+    @LogExecutionTime
     public Organization getOrganization(@PathVariable(value = "organizationId") String organizationId )
             throws OrganizationNotFoundException {
 

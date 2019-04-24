@@ -10,6 +10,7 @@
         <module>organizastion-service</module>
         <module>zuul</module>
         <module>oauth-server</module>
+        <module>shared-resources</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -28,6 +29,17 @@
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
     </properties>
 
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.8</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
 
 
     <dependencyManagement>

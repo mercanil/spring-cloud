@@ -39,7 +39,6 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     @HystrixCommand(fallbackMethod = "buildFallbackLicenseList")
-
     public License getLicense(String organizationId, String licenseId ) throws LicenseNotFoundException {
         sleep();
         Optional<License> license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
