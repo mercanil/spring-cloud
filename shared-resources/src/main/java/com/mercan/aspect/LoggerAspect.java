@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class LoggerAspect {
-    @Around("@annotation(LogExecutionTime)")
+    @Around("@annotation(com.mercan.annotation.LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
 
         Object proceed = joinPoint.proceed();
 
         long executionTime = System.currentTimeMillis() - start;
-        log.debug(joinPoint.getSignature() + " executed in " + executionTime + "ms");
+        log.error(joinPoint.getSignature() + " executed in " + executionTime + "ms");
         return proceed;
     }
 }
