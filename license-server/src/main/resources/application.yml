@@ -1,2 +1,2 @@
-tracer:
-  property:  "I AM THE DEFAULT"
+logging:
+  file: application.log

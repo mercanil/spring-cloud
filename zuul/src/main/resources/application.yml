@@ -18,7 +18,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: routes, filters #http://localhost:6060/actuator/routesó
+        include: routes, filters #http://localhost:6060/actuator/routesï¿½
 
 zuul:
   ignored-services:
@@ -29,3 +29,6 @@ zuul:
     licensestatic:
       path: /test/**
       url : http://static-content-outside-eureka
+
+logging:
+  file: application.log
