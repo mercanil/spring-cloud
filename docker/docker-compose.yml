@@ -1,0 +1,70 @@
+version: '3'
+services:
+  redis:
+    image: redis:5.0-alpine
+    container_name: redis
+    ports:
+      - '6379:6379'
+    networks:
+      - back-tier
+
+  postgres:
+    image: postgres:9.4
+    container_name: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'db-data:/var/lib/postgresql/data'
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=license
+    networks:
+      - back-tier
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - '27017:27017'
+    networks:
+      - back-tier
+
+  elasticsearch:
+    container_name: elastic
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data
+    networks:
+      - back-tier
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:6.3.2
+    ports:
+      - '5601:5601'
+    depends_on:
+      - elasticsearch
+    networks:
+      - back-tier
+
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:6.3.2
+    ports:
+      - '25826:25826'
+    volumes:
+      - ./elk-config:/elk-config
+    command: logstash -f /elk-config/logstash.config
+    depends_on:
+      - elasticsearch
+    networks:
+      - back-tier
+volumes:
+  db-data:
+
+networks:
+  back-tier:
