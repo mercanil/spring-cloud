@@ -12,5 +12,10 @@ management:
   security:
     enabled: false
 
-logging:
-  file: /tmp/server.log
+logback:
+  path: ${user.home}/logs
+  maxFileSize: 10MB
+  maxHistory: 90
+  level: INFO
+  fileName: demo
+

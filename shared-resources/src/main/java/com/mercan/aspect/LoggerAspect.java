@@ -13,7 +13,8 @@ public class LoggerAspect {
     @Around("@annotation(com.mercan.annotation.LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
-
+        log.error("This is really important point. In this place " +
+                "method started to execute");
         Object proceed = joinPoint.proceed();
 
         long executionTime = System.currentTimeMillis() - start;
