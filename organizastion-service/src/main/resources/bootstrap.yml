@@ -2,7 +2,7 @@ spring:
   application:
     name: organizationservice #must map config server folder name
   profiles:
-    active: dev
+    active: prod
   cloud:
     config:
       enabled: true
@@ -11,3 +11,6 @@ spring:
 management:
   security:
     enabled: false
+
+logging:
+  file: /tmp/server.log

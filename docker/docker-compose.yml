@@ -1,5 +1,7 @@
 version: '3'
 services:
+
+
   redis:
     image: redis:5.0-alpine
     container_name: redis
@@ -31,13 +33,13 @@ services:
       - back-tier
 
   elasticsearch:
-    container_name: elastic
+    container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
     ports:
       - '9200:9200'
       - '9300:9300'
     volumes:
-      - ./esdata:/usr/share/elasticsearch/data
+      - esdata1:/usr/share/elasticsearch/data
     networks:
       - back-tier
 
@@ -46,6 +48,8 @@ services:
     image: docker.elastic.co/kibana/kibana:6.3.2
     ports:
       - '5601:5601'
+    environment:
+    - ELASTICSEARCH_HOSTS = http://elasticsearch:9200
     depends_on:
       - elasticsearch
     networks:
@@ -53,18 +57,19 @@ services:
 
   logstash:
     container_name: logstash
-    image: docker.elastic.co/logstash/logstash:6.3.2
+    image: docker.elastic.co/logstash/logstash:7.0.0@sha256:4d6c69575f150ac962bb2950bef24b6e3c677bfa325b0fa36c8c6493f143fd86
     ports:
-      - '25826:25826'
+      - '5044:5044'
     volumes:
-      - ./elk-config:/elk-config
-    command: logstash -f /elk-config/logstash.config
+      - ./logstash/:/etc/logstash/:Z
     depends_on:
       - elasticsearch
     networks:
       - back-tier
 volumes:
   db-data:
+  esdata1:
+    driver: local
 
 networks:
   back-tier:
